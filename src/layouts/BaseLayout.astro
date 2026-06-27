@@ -1,0 +1,157 @@
+---
+// src/layouts/BaseLayout.astro
+// Wraps every page with the nav, footer, and global styles.
+// To update the nav links, edit the `navLinks` array below.
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Will Armsworthy — CS student at Notre Dame" } = Astro.props;
+
+const navLinks = [
+  { href: "/#home",     label: "Home" },
+  { href: "/#about",    label: "About" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#contact",  label: "Contact" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <!-- FONT: swap these out in one place to change the font site-wide -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/" class="nav-logo">Will Armsworthy</a>
+      <ul>
+        {navLinks.map(({ href, label }) => (
+          <li>
+            <a href={href} class={currentPath === href ? "active" : ""}>{label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <slot /> <!-- page content goes here -->
+  </main>
+
+  <footer>
+    <p>© {new Date().getFullYear()} Will Armsworthy</p>
+  </footer>
+</body>
+</html>
+
+<style is:global>
+  /* ── DESIGN TOKENS ─────────────────────────────────────────── */
+  /* Change colors, fonts, and spacing here — they cascade everywhere */
+  :root {
+    --color-bg:       #f9f9f8;
+    --color-surface:  #ffffff;
+    --color-border:   #e5e5e5;
+    --color-text:     #1a1a1a;
+    --color-muted:    #6b7280;
+    --color-accent:   #0057ff;        /* → update to your preferred accent color */
+    --color-accent-hover: #0041cc;
+
+    --font-sans: 'Inter', system-ui, sans-serif;
+
+    --radius:   8px;
+    --max-width: 900px;
+    --nav-height: 60px;
+  }
+
+  /* ── RESET ──────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  /* ── NAV ────────────────────────────────────────────────────── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-height);
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 1000;
+  }
+
+  nav {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+
+  .nav-logo {
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+
+  nav ul li a:hover,
+  nav ul li a.active {
+    color: var(--color-accent);
+  }
+
+  /* ── MAIN ───────────────────────────────────────────────────── */
+  main {
+    margin-top: var(--nav-height);
+  }
+
+  /* ── FOOTER ─────────────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+    padding: 2rem;
+    color: var(--color-muted);
+    font-size: 0.85rem;
+  }
+
+  /* ── UTILITIES ──────────────────────────────────────────────── */
+  a { color: var(--color-accent); }
+  h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    nav ul { gap: 1rem; }
+    .nav-logo { display: none; } /* show only links on mobile */
+  }
+</style>

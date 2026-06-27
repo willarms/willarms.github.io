@@ -1,0 +1,148 @@
+---
+// src/components/ProjectCard.astro
+// Renders a single project card on the homepage grid.
+// To change the card design, only edit this one file.
+
+import type { Project } from "../data/projects";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { slug, title, shortDescription, techStack, status, githubUrl, demoUrl, screenshot } = project;
+
+const statusLabel: Record<string, string> = {
+  "complete":    "Complete",
+  "in-progress": "In Progress",
+  "planned":     "Planned",
+};
+---
+
+<article class="project-card">
+  {screenshot && (
+    <div class="card-image">
+      <img src={`/assets/screenshots/${screenshot}`} alt={`${title} screenshot`} loading="lazy" />
+    </div>
+  )}
+
+  <div class="card-body">
+    <div class="card-header">
+      <h3>{title}</h3>
+      <span class={`status-badge status-${status}`}>{statusLabel[status]}</span>
+    </div>
+
+    <p class="card-description">{shortDescription}</p>
+
+    <ul class="tech-stack">
+      {techStack.map((tech) => <li>{tech}</li>)}
+    </ul>
+
+    <div class="card-links">
+      <!-- Future: swap this href to `/projects/${slug}` when you add project pages -->
+      {githubUrl && <a href={githubUrl} target="_blank" rel="noopener">GitHub →</a>}
+      {demoUrl   && <a href={demoUrl}   target="_blank" rel="noopener">Live Demo →</a>}
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+
+  .project-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  /* Screenshot area — shows a placeholder tint if no image */
+  .card-image {
+    background: var(--color-border);
+    height: 160px;
+    overflow: hidden;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .card-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* Status badge */
+  .status-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 99px;
+    white-space: nowrap;
+  }
+  .status-complete    { background: #d1fae5; color: #065f46; }
+  .status-in-progress { background: #fef3c7; color: #92400e; }
+  .status-planned     { background: #e0e7ff; color: #3730a3; }
+
+  .card-description {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    flex: 1;
+  }
+
+  /* Tech stack pills */
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+  }
+
+  .tech-stack li {
+    font-size: 0.75rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.15rem 0.5rem;
+    color: var(--color-muted);
+  }
+
+  .card-links {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .card-links a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .card-links a:hover {
+    text-decoration: underline;
+  }
+</style>

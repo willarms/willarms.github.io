@@ -1,0 +1,208 @@
+---
+// src/pages/projects/[slug].astro
+// ─────────────────────────────────────────────────────────────
+// FUTURE: Individual project pages.
+// This file is ready to go — you just need to:
+//   1. Uncomment this file (remove the return early below)
+//   2. Add `longDescription` and `highlights` fields to projects
+//      in src/data/projects.ts
+//   3. Update ProjectCard.astro to link to /projects/${slug}
+//      instead of directly to GitHub
+// ─────────────────────────────────────────────────────────────
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { allProjects } from "../../data/projects";
+import type { GetStaticPaths } from "astro";
+
+// Astro needs to know all possible slugs at build time.
+// This runs once and generates one page per project.
+export const getStaticPaths = (() => {
+  return allProjects.map((project) => ({
+    params: { slug: project.slug },
+    props:  { project },
+  }));
+}) satisfies GetStaticPaths;
+
+const { project } = Astro.props;
+const {
+  title,
+  longDescription,
+  shortDescription,
+  techStack,
+  status,
+  githubUrl,
+  demoUrl,
+  screenshot,
+  highlights,
+} = project;
+---
+
+<BaseLayout title={`${title} — Will Armsworthy`} description={shortDescription}>
+  <article class="project-page">
+    <div class="page-inner">
+
+      <a href="/#projects" class="back-link">← All projects</a>
+
+      <header class="project-header">
+        <h1>{title}</h1>
+        <p class="project-subtitle">{shortDescription}</p>
+
+        <ul class="tech-stack">
+          {techStack.map((tech) => <li>{tech}</li>)}
+        </ul>
+
+        <div class="project-links">
+          {githubUrl && (
+            <a href={githubUrl} target="_blank" rel="noopener" class="btn-primary">
+              View on GitHub →
+            </a>
+          )}
+          {demoUrl && (
+            <a href={demoUrl} target="_blank" rel="noopener" class="btn-ghost">
+              Live Demo →
+            </a>
+          )}
+        </div>
+      </header>
+
+      {screenshot && (
+        <div class="project-screenshot">
+          <img src={`/assets/screenshots/${screenshot}`} alt={`${title} screenshot`} />
+        </div>
+      )}
+
+      {(longDescription || highlights) && (
+        <div class="project-body">
+          {longDescription && <p>{longDescription}</p>}
+
+          {highlights && highlights.length > 0 && (
+            <>
+              <h2>Highlights</h2>
+              <ul class="highlights">
+                {highlights.map((h) => <li>{h}</li>)}
+              </ul>
+            </>
+          )}
+        </div>
+      )}
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .project-page {
+    padding: 4rem 0;
+  }
+
+  .page-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .back-link {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    text-decoration: none;
+  }
+
+  .back-link:hover { color: var(--color-accent); }
+
+  .project-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .project-header h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+  }
+
+  .project-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+  }
+
+  .tech-stack li {
+    font-size: 0.8rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.2rem 0.6rem;
+    color: var(--color-muted);
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--color-accent);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .btn-primary:hover { background: var(--color-accent-hover); color: #fff; }
+
+  .btn-ghost {
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .btn-ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+  .project-screenshot {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .project-screenshot img {
+    width: 100%;
+    display: block;
+  }
+
+  .project-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: var(--color-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .project-body h2 {
+    font-size: 1.25rem;
+    color: var(--color-text);
+  }
+
+  .highlights {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+</style>
