@@ -1,0 +1,9 @@
+// astro.config.mjs
+
+import { defineConfig } from 'astro/config';
+
+export default defineConfig({
+  output: 'static',
+
+  site: 'https://willarms.github.io',
+});
