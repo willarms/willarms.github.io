@@ -10,7 +10,10 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { slug, title, shortDescription, techStack, status, githubUrl, demoUrl, screenshot } = project;
+const { slug, title, shortDescription, techStack, status, githubUrl, demoUrl, screenshot, video, longDescription, highlights } = project;
+
+// Only link to the dedicated project page once it actually has extra content to show
+const hasDetailPage = Boolean(video || longDescription || (highlights && highlights.length > 0));
 
 const statusLabel: Record<string, string> = {
   "complete":    "Complete",
@@ -39,7 +42,7 @@ const statusLabel: Record<string, string> = {
     </ul>
 
     <div class="card-links">
-      <!-- Future: swap this href to `/projects/${slug}` when you add project pages -->
+      {hasDetailPage && <a href={`/projects/${slug}`}>Details →</a>}
       {githubUrl && <a href={githubUrl} target="_blank" rel="noopener">GitHub →</a>}
       {demoUrl   && <a href={demoUrl}   target="_blank" rel="noopener">Live Demo →</a>}
     </div>

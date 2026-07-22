@@ -33,6 +33,7 @@ const {
   githubUrl,
   demoUrl,
   screenshot,
+  video,
   highlights,
 } = project;
 ---
@@ -68,6 +69,14 @@ const {
       {screenshot && (
         <div class="project-screenshot">
           <img src={`/assets/screenshots/${screenshot}`} alt={`${title} screenshot`} />
+        </div>
+      )}
+
+      {video && (
+        <div class="project-video">
+          <video controls preload="metadata" playsinline>
+            <source src={`/assets/screen-recordings/${video}`} />
+          </video>
         </div>
       )}
 
@@ -181,6 +190,17 @@ const {
   }
 
   .project-screenshot img {
+    width: 100%;
+    display: block;
+  }
+
+  .project-video {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .project-video video {
     width: 100%;
     display: block;
   }
