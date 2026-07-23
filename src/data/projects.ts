@@ -24,21 +24,22 @@ export const projects: Project[] = [
     status: "complete",
     featured: true,
     githubUrl: "https://github.com/willarms/sportsbetting-historical-backtester",
-    // screenshot: "betwise.png",
+    screenshot: "betwise-screenshot.png",
+    video: "betwise-demo.mp4",  // compressed from 33.8MB .mov (3024x1652/120fps) → ~1.5MB, 1280w/30fps/no audio
   },
   {
     slug: "pos-evm",
     title: "Positive EV Model",
-    shortDescription: "Algorithm that scrapes lines across online sportsbooks to identify statistical outliers and positive expected value bets.",
+    shortDescription: "Model pairs web scraping online sportsbooks with an algorithm to identify positive expected value bets",
     techStack: ["Python"],
     status: "in-progress",
-    featured: true,
+    featured: false,
     githubUrl: "https://github.com/willarms/posEVM",  // update URL if needed
   },
   {
     slug: "game-of-life",
     title: "Conway's Game of Life",
-    shortDescription: "Command-line implementation of Conway's Game of Life, built around a custom life-simulation library with a Makefile-driven build.",
+    shortDescription: "Command-line implementation of Conway's Game of Life, built around a simulation library with a Makefile-driven build.",
     techStack: ["C"],
     status: "complete",
     featured: false,
@@ -58,29 +59,29 @@ export const projects: Project[] = [
       "JWT-based auth with a documented test account for demos",
       "Uses Google OAuth to support seamless transition to video calls for groups"
     ],
-    // NOTE: README documents an unresolved Google OAuth 500 error — fix or note as a known issue before showcasing a live demo
   },
   {
     slug: "web3-db",
     title: "Web3 Database",
-    shortDescription: "A decentralized file-storage system: a Solidity smart contract for on-chain metadata paired with a FastAPI backend and web frontend for uploading and browsing files.",
-    techStack: ["Solidity", "Hardhat", "Python", "FastAPI", "JavaScript"],
+    shortDescription: "Undergraduate research project building a decentralized file-storage system. Uses a Solidity smart contract for on-chain metadata paired with a FastAPI backend and web frontend for uploading and browsing files.",
+    techStack: ["Solidity", "Hardhat", "Python", "FastAPI", "React"],
     status: "complete",
-    featured: false,
+    featured: true,
     githubUrl: "https://github.com/willarms/web3DB",  // update URL
     video: "web3db-demo.mp4",  // compressed from devBox/web3DB/tests/fs-demo.mp4 (10MB → ~625KB, 1280w/30fps/no audio)
-    // screenshot: "web3db.png",  // source: devBox/web3DB/tests/Screenshot 2025-09-28 at 3.21.04 PM.png
+    screenshot: "web3db-fs-ss.png",
     highlights: [
-      "Team project — this entry covers your contribution",
+      "Project I worked on as a memeber of Notre Dame's Data Security and Privacy Lab",
+      "File system built for Web3 database",
       "On-chain file metadata via a Hardhat-managed Solidity contract",
       "Early stages end-to-end demo recorded (see devBox/web3DB/tests/)",
-      "Check updated project url for project's progress"
+      "See project's progress here: https://fs.web3db.org/"
     ],
   },
   {
     slug: "scheme-tictactoe",
     title: "Scheme Tic-Tac-Toe",
-    shortDescription: "Tic-Tac-Toe implemented in Scheme, a functional Lisp dialect.",
+    shortDescription: "Course project implementing Tic-Tac-Toe game in Scheme, a functional Lisp dialect.",
     techStack: ["Scheme"],
     status: "complete",
     featured: false,
@@ -89,7 +90,7 @@ export const projects: Project[] = [
   {
     slug: "java-game",
     title: "Java Arcade Game",
-    shortDescription: "A small Java arcade-style game built around a Strategy-pattern collider system (easy/medium/hard difficulty variants).",
+    shortDescription: "A small Java arcade-style game built around a Strategy-pattern collider system with multiple difficulties.",
     techStack: ["Java"],
     status: "complete",
     featured: false,
@@ -100,20 +101,15 @@ export const projects: Project[] = [
   // {
   //   slug: "cbb-model",
   //   title: "CBB Prediction Model",
-  //   shortDescription: "Monte Carlo March Madness bracket model blending KenPom/Torvik ratings with market odds and public pick rates.",
+  //   shortDescription: "Compares implied winning % (from Monte Carlo sims and betting odds to advance) and public pick % to provide recommended bracket pool strategy",
   //   techStack: ["Python", "pandas", "scikit-learn"],
   //   status: "in-progress",
   //   featured: false,
   // },
   // {
-  //   slug: "whale-tracker",
-  //   title: "Whale Tracker",
-  //   ...  // not started — no local code found yet
-  // },
-  // {
   //   slug: "cherrypy-movie-rec",
   //   title: "Movie Recommender (CherryPy)",
-  //   shortDescription: "A CherryPy-based movie recommendation web app with a full test suite, built on a MovieLens-style dataset.",
+  //   shortDescription: "Movie recommendation web app built on a Movie-Lens database.",
   //   techStack: ["Python", "CherryPy"],
   //   status: "complete",
   //   featured: false,

@@ -36,6 +36,17 @@ const {
   video,
   highlights,
 } = project;
+
+// Turns any bare http(s) URL inside a highlight string into a clickable link.
+// Escapes everything else first so the rest of the text can't be interpreted as HTML.
+const escapeHtml = (s: string) =>
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+const linkifyHighlight = (text: string) =>
+  escapeHtml(text).replace(
+    /(https?:\/\/[^\s<]+)/g,
+    (url) => `<a href="${url}" target="_blank" rel="noopener">${url}</a>`
+  );
 ---
 
 <BaseLayout title={`${title} — Will Armsworthy`} description={shortDescription}>
@@ -88,7 +99,7 @@ const {
             <>
               <h2>Highlights</h2>
               <ul class="highlights">
-                {highlights.map((h) => <li>{h}</li>)}
+                {highlights.map((h) => <li set:html={linkifyHighlight(h)} />)}
               </ul>
             </>
           )}
@@ -224,5 +235,9 @@ const {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .highlights a {
+    color: var(--color-accent);
   }
 </style>

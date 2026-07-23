@@ -8,7 +8,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Will Armsworthy — CS student at Notre Dame" } = Astro.props;
+const { title, description = "Will Armsworthy — Analyst @ insight2profit" } = Astro.props;
 
 const navLinks = [
   { href: "/#home",     label: "Home" },
@@ -33,7 +33,7 @@ const currentPath = Astro.url.pathname;
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <nav>
       <a href="/" class="nav-logo">Will Armsworthy</a>
       <ul>
@@ -86,7 +86,7 @@ const currentPath = Astro.url.pathname;
   }
 
   /* ── NAV ────────────────────────────────────────────────────── */
-  header {
+  .site-header {
     position: fixed;
     top: 0; left: 0; right: 0;
     height: var(--nav-height);
