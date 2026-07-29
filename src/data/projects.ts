@@ -20,13 +20,16 @@ export const projects: Project[] = [
   {
     slug: "betwise",
     title: "BetWise — Sports Betting Historical Backtester",
-    shortDescription: "Won first place in Advanced Databases course. A web app for inputting and analyzing the historical performance of NBA sportsbetting strategies.",
+    shortDescription: "A web app for inputting and analyzing the historical performance of NBA sportsbetting strategies. Group won first place in Advanced Database course-long competition",
     techStack: ["Python", "SQL", "Flask", "JavaScript"],
     status: "complete",
     featured: true,
     githubUrl: "https://github.com/willarms/sportsbetting-historical-backtester",
     highlights: [
-
+      "Built using a pluggable Oracle DB hosted on school server",
+      "Historical betting data was fed into DB from TheOddsAPI, NBA results data fed from NBA python library"
+      "Supports a wide variety of potential betting strategies differentiated by book, team, and market"
+      "Backend algorithm allows user to view only bets that would have been considered 'positive expected value' --> shows positive ROI given large sample size" 
     ],
     screenshot: "betwise-screenshot.png",
     video: "betwise-demo.mp4",  // compressed from 33.8MB .mov (3024x1652/120fps) → ~1.5MB, 1280w/30fps/no audio
@@ -35,7 +38,7 @@ export const projects: Project[] = [
   {
     slug: "game-of-life",
     title: "Conway's Game of Life",
-    shortDescription: "Command-line implementation of Conway's Game of Life, built around a simulation library with a Makefile-driven build.",
+    shortDescription: "Command-line implementation of Conway's Game of Life, built around a simulation library with a Makefile-driven build while learning C.",
     techStack: ["C"],
     status: "complete",
     featured: false,
@@ -59,7 +62,7 @@ export const projects: Project[] = [
   {
     slug: "web3-db",
     title: "Web3 Database",
-    shortDescription: "Undergraduate research project building a decentralized file-storage system. Uses a Solidity smart contract for on-chain metadata paired with a FastAPI backend and web frontend for uploading and browsing files.",
+    shortDescription: "Worked in Notre Dame's Data Security and Privacy Lab building a decentralized file-storage system. Uses a Solidity smart contract for on-chain metadata paired with a FastAPI backend and web frontend for uploading and browsing files.",
     techStack: ["Solidity", "Hardhat", "Python", "FastAPI", "React"],
     status: "complete",
     featured: true,
@@ -67,10 +70,11 @@ export const projects: Project[] = [
     video: "web3db-demo.mp4",  // compressed from devBox/web3DB/tests/fs-demo.mp4 (10MB → ~625KB, 1280w/30fps/no audio)
     screenshot: "web3db-fs-ss.png",
     highlights: [
-      "Project I worked on as a member of Notre Dame's Data Security and Privacy Lab",
-      "File system built for Web3 database",
+      "ND DSP-Lab project work under Professor Taeho Jung in the Dpmt of Computer Science and Engineering",
+      "File system built for Web3 database prioritizing no centralized node/entity controlling data access",
       "On-chain file metadata via a Hardhat-managed Solidity contract",
-      "See project's progress here: https://fs.web3db.org/"
+      "Check out project's progress here: https://fs.web3db.org/"
+      "For more about DSP-Lab see: https://sites.nd.edu/taeho-jung/dsp-lab/"
     ],
   },
   {
@@ -85,7 +89,7 @@ export const projects: Project[] = [
   {
     slug: "java-game",
     title: "Java Arcade Game",
-    shortDescription: "A small Java arcade-style game built around a Strategy-pattern collider system with multiple difficulties.",
+    shortDescription: "A small Java arcade-style game built around a Strategy-pattern collider system with multiple difficulties for paradigms course.",
     techStack: ["Java"],
     status: "complete",
     featured: false,
