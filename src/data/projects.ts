@@ -12,6 +12,7 @@ export interface Project {
   demoUrl?: string;
   screenshot?: string;             // path relative to /public/assets/screenshots/
   video?: string;                  // path relative to /public/assets/screen-recordings/, only rendered on the project detail page
+  slides?: string;                 // path relative to /public/assets/presentations/, only rendered on the project detail page
   highlights?: string[];           // bullet points for future project pages
 }
 
@@ -24,8 +25,12 @@ export const projects: Project[] = [
     status: "complete",
     featured: true,
     githubUrl: "https://github.com/willarms/sportsbetting-historical-backtester",
+    highlights: [
+
+    ],
     screenshot: "betwise-screenshot.png",
     video: "betwise-demo.mp4",  // compressed from 33.8MB .mov (3024x1652/120fps) → ~1.5MB, 1280w/30fps/no audio
+    slides: "betwise-presentation.pptx",
   },
   {
     slug: "game-of-life",

@@ -34,6 +34,7 @@ const {
   demoUrl,
   screenshot,
   video,
+  slides,
   highlights,
 } = project;
 
@@ -72,6 +73,11 @@ const linkifyHighlight = (text: string) =>
           {demoUrl && (
             <a href={demoUrl} target="_blank" rel="noopener" class="btn-ghost">
               Live Demo →
+            </a>
+          )}
+          {slides && (
+            <a href={`/assets/presentations/${slides}`} download class="btn-ghost">
+              Download Slides →
             </a>
           )}
         </div>
