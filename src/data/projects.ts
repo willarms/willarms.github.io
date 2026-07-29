@@ -28,15 +28,6 @@ export const projects: Project[] = [
     video: "betwise-demo.mp4",  // compressed from 33.8MB .mov (3024x1652/120fps) → ~1.5MB, 1280w/30fps/no audio
   },
   {
-    slug: "pos-evm",
-    title: "Positive EV Model",
-    shortDescription: "Model pairs web scraping online sportsbooks with an algorithm to identify positive expected value bets",
-    techStack: ["Python"],
-    status: "in-progress",
-    featured: false,
-    githubUrl: "https://github.com/willarms/posEVM",  // update URL if needed
-  },
-  {
     slug: "game-of-life",
     title: "Conway's Game of Life",
     shortDescription: "Command-line implementation of Conway's Game of Life, built around a simulation library with a Makefile-driven build.",
@@ -71,10 +62,9 @@ export const projects: Project[] = [
     video: "web3db-demo.mp4",  // compressed from devBox/web3DB/tests/fs-demo.mp4 (10MB → ~625KB, 1280w/30fps/no audio)
     screenshot: "web3db-fs-ss.png",
     highlights: [
-      "Project I worked on as a memeber of Notre Dame's Data Security and Privacy Lab",
+      "Project I worked on as a member of Notre Dame's Data Security and Privacy Lab",
       "File system built for Web3 database",
       "On-chain file metadata via a Hardhat-managed Solidity contract",
-      "Early stages end-to-end demo recorded (see devBox/web3DB/tests/)",
       "See project's progress here: https://fs.web3db.org/"
     ],
   },
@@ -98,6 +88,16 @@ export const projects: Project[] = [
   },
 
   // --- Projects to add later ---
+  // {
+  //   slug: "pos-evm",
+  //   title: "Positive EV Model",
+  //   shortDescription: "Model pairs web scraping online sportsbooks with an algorithm to identify positive expected value bets",
+  //   techStack: ["Python"],
+  //   status: "in-progress",
+  //   featured: false,
+  //   githubUrl: "https://github.com/willarms/posEVM",  // update URL if needed
+  //   // hidden while still in progress — re-add when ready to show
+  // },
   // {
   //   slug: "cbb-model",
   //   title: "CBB Prediction Model",
