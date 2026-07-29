@@ -85,7 +85,7 @@ export const projects: Project[] = [
     techStack: ["Scheme"],
     status: "complete",
     featured: false,
-    // No dedicated GitHub repo — lives in devBox/nd-files/scheme-tictactoe/
+    githubUrl: "https://github.com/willarms/scheme-tictactoe",
   },
   {
     slug: "java-game",
@@ -94,7 +94,7 @@ export const projects: Project[] = [
     techStack: ["Java"],
     status: "complete",
     featured: false,
-    // No dedicated GitHub repo — lives in devBox/nd-files/javaGame/. Checklist marks this "might not include."
+    githubUrl: "https://github.com/willarms/javaGame",
   },
 
   // --- Projects to add later ---
