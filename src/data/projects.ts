@@ -50,7 +50,7 @@ export const projects: Project[] = [
     shortDescription: "A social app designed for elderly users built for a Human-AI Collaboration course project.",
     techStack: ["Python", "FastAPI", "Socket.IO", "SQLite", "Alembic", "React"],
     status: "complete",
-    featured: false,
+    featured: true,
     githubUrl: "https://github.com/willarms/turtle-connect",
     highlights: [
       "FastAPI + Socket.IO backend with SQLAlchemy/Alembic-managed SQLite database",

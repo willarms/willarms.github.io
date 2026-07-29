@@ -52,7 +52,7 @@ const others   = allProjects.filter((p) => !p.featured);
 
       {featured.length > 0 && (
         <>
-          <h3 class="section-sub">Featured</h3>
+          <h3 class="section-sub">Recent Projects</h3>
           <div class="projects-grid">
             {featured.map((project) => (
               <ProjectCard project={project} />
@@ -63,7 +63,7 @@ const others   = allProjects.filter((p) => !p.featured);
 
       {others.length > 0 && (
         <>
-          <h3 class="section-sub" style="margin-top: 2.5rem;">Other Projects</h3>
+          <h3 class="section-sub" style="margin-top: 2.5rem;">Older Projects</h3>
           <div class="projects-grid">
             {others.map((project) => (
               <ProjectCard project={project} />
