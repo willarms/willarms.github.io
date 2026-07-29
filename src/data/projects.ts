@@ -95,6 +95,15 @@ export const projects: Project[] = [
     featured: false,
     githubUrl: "https://github.com/willarms/javaGame",
   },
+  {
+    slug: "cherrypy-movie-rec",
+    title: "Movie Recommender (CherryPy)",
+    shortDescription: "Movie recommendation web app built on a Movie-Lens database.",
+    techStack: ["Python", "CherryPy"],
+    status: "complete",
+    featured: false,
+    githubUrl: "https://github.com/willarms/cherrypy-movieRec",
+  },
 
   // --- Projects to add later ---
   // {
