@@ -27,8 +27,8 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/willarms/sportsbetting-historical-backtester",
     highlights: [
       "Built using a pluggable Oracle DB hosted on school server",
-      "Historical betting data was fed into DB from TheOddsAPI, NBA results data fed from NBA python library"
-      "Supports a wide variety of potential betting strategies differentiated by book, team, and market"
+      "Historical betting data was fed into DB from TheOddsAPI, NBA results data fed from NBA python library",
+      "Supports a wide variety of potential betting strategies differentiated by book, team, and market",
       "Backend algorithm allows user to view only bets that would have been considered 'positive expected value' --> shows positive ROI given large sample size" 
     ],
     screenshot: "betwise-screenshot.png",
@@ -73,7 +73,7 @@ export const projects: Project[] = [
       "ND DSP-Lab project work under Professor Taeho Jung in the Dpmt of Computer Science and Engineering",
       "File system built for Web3 database prioritizing no centralized node/entity controlling data access",
       "On-chain file metadata via a Hardhat-managed Solidity contract",
-      "Check out project's progress here: https://fs.web3db.org/"
+      "Check out project's progress here: https://fs.web3db.org/",
       "For more about DSP-Lab see: https://sites.nd.edu/taeho-jung/dsp-lab/"
     ],
   },
