@@ -49,10 +49,6 @@ const currentPath = Astro.url.pathname;
   <main>
     <slot /> <!-- page content goes here -->
   </main>
-
-  <footer>
-    <p>© {new Date().getFullYear()} Will Armsworthy</p>
-  </footer>
 </body>
 </html>
 
@@ -134,15 +130,6 @@ const currentPath = Astro.url.pathname;
   /* ── MAIN ───────────────────────────────────────────────────── */
   main {
     margin-top: var(--nav-height);
-  }
-
-  /* ── FOOTER ─────────────────────────────────────────────────── */
-  footer {
-    border-top: 1px solid var(--color-border);
-    text-align: center;
-    padding: 2rem;
-    color: var(--color-muted);
-    font-size: 0.85rem;
   }
 
   /* ── UTILITIES ──────────────────────────────────────────────── */

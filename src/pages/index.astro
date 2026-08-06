@@ -32,15 +32,22 @@ const others   = allProjects.filter((p) => !p.featured);
   <section id="about">
     <div class="section-inner">
       <h2>About Me</h2>
-      <div class="about-content">
-        <p>
-          What's up! I'm Will, currently working as a Business Analyst at Insight2Profit.
-          I graduated in May 2026 from the University of Notre Dame with a degree in Computer Science.
-          Based in Chicago, I've recently developed an interest in urban planning and development.
-          I also love data organization and analytics, especially when I can apply this interest to the sports I follow.
-          Feel free to take a look at some of my experience and things I've built, and don't hesitate to reach out if you'd like!
-        </p>
-        <!-- Add more paragraphs, a skills list, coursework, etc. here -->
+      <div class="about-layout">
+        <img
+          src="/assets/pictures/pweb2.JPG"
+          alt="Will Armsworthy"
+          class="about-photo"
+        />
+        <div class="about-content">
+          <p>
+            What's up! I'm Will, currently working as a Business Analyst at Insight2Profit.
+            I graduated in May 2026 from the University of Notre Dame with a degree in Computer Science.
+            Based in Chicago, I've recently developed an interest in urban planning and development.
+            I also love data organization and analytics, especially when I can apply this interest to the sports I follow.
+            Feel free to take a look at some of my experience and things I've built, and don't hesitate to reach out if you'd like!
+          </p>
+          <!-- Add more paragraphs, a skills list, coursework, etc. here -->
+        </div>
       </div>
     </div>
   </section>
@@ -204,12 +211,35 @@ const others   = allProjects.filter((p) => !p.featured);
   }
 
   /* ── ABOUT ────────────────────────────────────────────────── */
+  .about-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5rem;
+    max-width: 900px;
+  }
+
+  .about-photo {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
   .about-content {
-    max-width: 640px;
     color: var(--color-muted);
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .about-layout {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
   }
 
   /* ── PROJECTS GRID ────────────────────────────────────────── */
