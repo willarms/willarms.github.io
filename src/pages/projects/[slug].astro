@@ -1,14 +1,8 @@
 ---
 // src/pages/projects/[slug].astro
-// ─────────────────────────────────────────────────────────────
-// FUTURE: Individual project pages.
-// This file is ready to go — you just need to:
-//   1. Uncomment this file (remove the return early below)
-//   2. Add `longDescription` and `highlights` fields to projects
-//      in src/data/projects.ts
-//   3. Update ProjectCard.astro to link to /projects/${slug}
-//      instead of directly to GitHub
-// ─────────────────────────────────────────────────────────────
+// Individual project detail page — one static page generated per project in
+// src/data/projects.ts. Linked from ProjectCard whenever a project has a
+// longDescription, video, or highlights.
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { allProjects } from "../../data/projects";
@@ -29,7 +23,6 @@ const {
   longDescription,
   shortDescription,
   techStack,
-  status,
   githubUrl,
   demoUrl,
   screenshot,
@@ -52,66 +45,68 @@ const linkifyHighlight = (text: string) =>
 
 <BaseLayout title={`${title} — Will Armsworthy`} description={shortDescription}>
   <article class="project-page">
-    <div class="page-inner">
+    <div class="container">
+      <div class="page-inner">
 
-      <a href="/#projects" class="back-link">← All projects</a>
+        <a href="/#projects" class="back-link">← All projects</a>
 
-      <header class="project-header">
-        <h1>{title}</h1>
-        <p class="project-subtitle">{shortDescription}</p>
+        <header class="project-header">
+          <h1>{title}</h1>
+          <p class="project-subtitle">{shortDescription}</p>
 
-        <ul class="tech-stack">
-          {techStack.map((tech) => <li>{tech}</li>)}
-        </ul>
+          <ul class="tech-stack">
+            {techStack.map((tech) => <li>{tech}</li>)}
+          </ul>
 
-        <div class="project-links">
-          {githubUrl && (
-            <a href={githubUrl} target="_blank" rel="noopener" class="btn-primary">
-              View on GitHub →
-            </a>
-          )}
-          {demoUrl && (
-            <a href={demoUrl} target="_blank" rel="noopener" class="btn-ghost">
-              Live Demo →
-            </a>
-          )}
-          {slides && (
-            <a href={`/assets/presentations/${slides}`} download class="btn-ghost">
-              Download Slides →
-            </a>
-          )}
-        </div>
-      </header>
+          <div class="project-links">
+            {githubUrl && (
+              <a href={githubUrl} target="_blank" rel="noopener" class="btn-primary">
+                View on GitHub →
+              </a>
+            )}
+            {demoUrl && (
+              <a href={demoUrl} target="_blank" rel="noopener" class="btn-ghost">
+                Live Demo →
+              </a>
+            )}
+            {slides && (
+              <a href={`/assets/presentations/${slides}`} download class="btn-ghost">
+                Download Slides →
+              </a>
+            )}
+          </div>
+        </header>
 
-      {screenshot && (
-        <div class="project-screenshot">
-          <img src={`/assets/screenshots/${screenshot}`} alt={`${title} screenshot`} />
-        </div>
-      )}
+        {screenshot && (
+          <div class="project-screenshot">
+            <img src={`/assets/screenshots/${screenshot}`} alt={`${title} screenshot`} />
+          </div>
+        )}
 
-      {video && (
-        <div class="project-video">
-          <video controls preload="metadata" playsinline>
-            <source src={`/assets/screen-recordings/${video}`} />
-          </video>
-        </div>
-      )}
+        {video && (
+          <div class="project-video">
+            <video controls preload="metadata" playsinline>
+              <source src={`/assets/screen-recordings/${video}`} />
+            </video>
+          </div>
+        )}
 
-      {(longDescription || highlights) && (
-        <div class="project-body">
-          {longDescription && <p>{longDescription}</p>}
+        {(longDescription || highlights) && (
+          <div class="project-body">
+            {longDescription && <p>{longDescription}</p>}
 
-          {highlights && highlights.length > 0 && (
-            <>
-              <h2>Highlights</h2>
-              <ul class="highlights">
-                {highlights.map((h) => <li set:html={linkifyHighlight(h)} />)}
-              </ul>
-            </>
-          )}
-        </div>
-      )}
+            {highlights && highlights.length > 0 && (
+              <>
+                <h2>Highlights</h2>
+                <ul class="highlights">
+                  {highlights.map((h) => <li set:html={linkifyHighlight(h)} />)}
+                </ul>
+              </>
+            )}
+          </div>
+        )}
 
+      </div>
     </div>
   </article>
 </BaseLayout>
@@ -123,20 +118,22 @@ const linkifyHighlight = (text: string) =>
 
   .page-inner {
     max-width: 720px;
-    margin: 0 auto;
-    padding: 0 2rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
   }
 
   .back-link {
-    font-size: 0.875rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: var(--color-muted);
     text-decoration: none;
   }
 
-  .back-link:hover { color: var(--color-accent); }
+  .back-link:hover { color: var(--color-navy); }
 
   .project-header {
     display: flex;
@@ -154,69 +151,20 @@ const linkifyHighlight = (text: string) =>
     color: var(--color-muted);
   }
 
-  .tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    list-style: none;
-  }
-
-  .tech-stack li {
-    font-size: 0.8rem;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    padding: 0.2rem 0.6rem;
-    color: var(--color-muted);
-  }
-
   .project-links {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
   }
 
-  .btn-primary {
-    background: var(--color-accent);
-    color: #fff;
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  .btn-primary:hover { background: var(--color-accent-hover); color: #fff; }
-
-  .btn-ghost {
-    border: 1px solid var(--color-border);
-    color: var(--color-text);
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--radius);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  .btn-ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
-
-  .project-screenshot {
-    border-radius: var(--radius);
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-  }
-
-  .project-screenshot img {
-    width: 100%;
-    display: block;
-  }
-
+  .project-screenshot,
   .project-video {
     border-radius: var(--radius);
     overflow: hidden;
     border: 1px solid var(--color-border);
   }
 
+  .project-screenshot img,
   .project-video video {
     width: 100%;
     display: block;
@@ -244,6 +192,6 @@ const linkifyHighlight = (text: string) =>
   }
 
   .highlights a {
-    color: var(--color-accent);
+    color: var(--color-navy);
   }
 </style>

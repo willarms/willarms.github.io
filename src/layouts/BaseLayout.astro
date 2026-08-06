@@ -1,6 +1,6 @@
 ---
 // src/layouts/BaseLayout.astro
-// Wraps every page with the nav, footer, and global styles.
+// Wraps every page with the nav and global styles.
 // To update the nav links, edit the `navLinks` array below.
 
 interface Props {
@@ -30,7 +30,7 @@ const currentPath = Astro.url.pathname;
   <!-- FONT: swap these out in one place to change the font site-wide -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
   <header class="site-header">
@@ -54,21 +54,33 @@ const currentPath = Astro.url.pathname;
 
 <style is:global>
   /* ── DESIGN TOKENS ─────────────────────────────────────────── */
-  /* Change colors, fonts, and spacing here — they cascade everywhere */
+  /* Palette: navy / grey / white, dominant — small accents allowed sparingly */
   :root {
-    --color-bg:       #f9f9f8;
-    --color-surface:  #ffffff;
-    --color-border:   #e5e5e5;
-    --color-text:     #1a1a1a;
-    --color-muted:    #6b7280;
-    --color-accent:   #0057ff;        /* → update to your preferred accent color */
-    --color-accent-hover: #0041cc;
+    --color-navy:         #031a40;
+    --color-navy-hover:   #0b2d5c;
+    --color-bg:           #ffffff;
+    --color-surface:      #ffffff;
+    --color-surface-alt:  #eef1f6;
+    --color-border:       #dcdddc;
+    --color-grey:         #a2a3a2;   /* borders/fills only — fails contrast as text on white */
+    --color-grey-strong:  #7d7e7d;
+    --color-text:         #031a40;
+    --color-muted:        #55606e;
+    --color-amber:        #9c5518;   /* sparing accent — FEATURED tag etc. */
+
+    --color-accent:       var(--color-navy);
+    --color-accent-hover: var(--color-navy-hover);
 
     --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
 
-    --radius:   8px;
-    --max-width: 900px;
-    --nav-height: 60px;
+    --radius:        3px;
+    --radius-pill:   999px;
+    --container-max: 1240px;
+    --gutter:        clamp(1.25rem, 4vw, 3rem);
+    --rail-width:    220px;
+    --rail-gap:      3rem;
+    --nav-height:    64px;
   }
 
   /* ── RESET ──────────────────────────────────────────────────── */
@@ -92,13 +104,13 @@ const currentPath = Astro.url.pathname;
   }
 
   nav {
-    max-width: var(--max-width);
+    max-width: var(--container-max);
     margin: 0 auto;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: 0 var(--gutter);
   }
 
   .nav-logo {
@@ -115,16 +127,19 @@ const currentPath = Astro.url.pathname;
   }
 
   nav ul li a {
+    font-family: var(--font-mono);
     text-decoration: none;
     color: var(--color-muted);
-    font-size: 0.9rem;
+    font-size: 0.78rem;
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     transition: color 0.15s;
   }
 
   nav ul li a:hover,
   nav ul li a.active {
-    color: var(--color-accent);
+    color: var(--color-navy);
   }
 
   /* ── MAIN ───────────────────────────────────────────────────── */
@@ -132,9 +147,105 @@ const currentPath = Astro.url.pathname;
     margin-top: var(--nav-height);
   }
 
+  /* ── LAYOUT UTILITIES ───────────────────────────────────────── */
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  /* Editorial rail + main split — the site's core asymmetric grid pattern */
+  .editorial-grid {
+    display: grid;
+    grid-template-columns: var(--rail-width) 1fr;
+    column-gap: var(--rail-gap);
+    align-items: start;
+  }
+
+  .editorial-grid > .rail {
+    border-right: 1px solid var(--color-border);
+    padding-right: calc(var(--rail-gap) - 1px);
+  }
+
+  .section-index {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 1rem;
+  }
+
+  .section-index em { color: var(--color-grey-strong); font-style: normal; margin: 0 0.15em; }
+
+  @media (max-width: 900px) {
+    .editorial-grid { grid-template-columns: 1fr; row-gap: 1.5rem; }
+    .editorial-grid > .rail {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+      padding-right: 0;
+      padding-bottom: 1.5rem;
+    }
+  }
+
+  /* ── SHARED UI (buttons, pills) ─────────────────────────────── */
+  .btn-primary {
+    display: inline-block;
+    background: var(--color-navy);
+    color: #fff;
+    padding: 0.65rem 1.4rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--color-navy-hover); color: #fff; }
+
+  .btn-ghost {
+    display: inline-block;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.65rem 1.4rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .btn-ghost:hover { border-color: var(--color-navy); color: var(--color-navy); }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+  }
+
+  .tech-stack li {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 0.2rem 0.55rem;
+    color: var(--color-muted);
+  }
+
   /* ── UTILITIES ──────────────────────────────────────────────── */
-  a { color: var(--color-accent); }
+  a { color: var(--color-navy); }
   h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
+
+  a:focus-visible,
+  button:focus-visible,
+  .btn-primary:focus-visible,
+  .btn-ghost:focus-visible {
+    outline: 2px solid var(--color-navy);
+    outline-offset: 2px;
+  }
 
   @media (max-width: 640px) {
     nav { padding: 0 1rem; }
